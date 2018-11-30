@@ -4,43 +4,6 @@
   Please edit en.json, not en.json.template
 */
 {
-    // menu items
-    "menu_api": "API",
-    "menu_explorer": "Explorer",
-    "menu_movement": "Movement",
-    "menu_network": "Network",
-    "menu_richlist": "Top 100",
-
-    // explorer view
-    "ex_title": "Block Explorer",
-    "ex_search_title": "Search",
-    "ex_search_button": "Search",
-    "ex_search_message": "You may enter a block height, block hash, tx hash or address.",
-    "ex_error": "Error!",
-    "ex_search_error": "Search found no results for: ",
-    "ex_latest_transactions": "Latest Transactions",
-    "ex_summary": "Block Summary",
-    "ex_supply": "Coin Supply",
-    "ex_block": "Block",
-
-    // transaction view
-    "tx_title": "Transaction Details",
-    "tx_block_hash": "Block Hash",
-    "tx_recipients": "Recipients",
-    "tx_contributors": "Input Addresses",
-    "tx_hash": "Tx Hash",
-    "tx_address": "Address",
-    "tx_nonstandard": "NONSTANDARD TX",
-
-    // movement view
-    "mv_latest_movements": "Latest Movements",
-
-    // block view
-    "block_previous": "Previous",
-    "block_next": "Next",
-    "block_title": "Block Details",
-    "block_genesis": "GENESIS",
-
     // global
     "network": "Network",
     "height": "Height",
@@ -55,12 +18,59 @@
     "bits": "Bits",
     "nonce": "Nonce",
     "new_coins": "New Coins",
-    "initial_index_alert": "Indexing is currently incomplete, functionality is limited until index is up-to-date.",
 
-    // address menu
-    "a_menu_showing": "Showing last",
-    "a_menu_txs": "transactions",
-    "a_menu_all": "All",
+    // menu items
+    "menu_api": "API",
+    "menu_explorer": "Explorer",
+    "menu_movement": "Movement",
+    "menu_network": "Network",
+    "menu_richlist": "Top 100",
+
+    // explorer
+    "ex_title": "Block Explorer",
+    "ex_search_title": "Search",
+    "ex_search_button": "Search",
+    "ex_search_message": "You may enter a block height, block hash, tx hash or address.",
+    "ex_error": "Error!",
+    "ex_warning": "Warning:",
+    "ex_search_error": "Search found no results for: ",
+    "ex_latest_transactions": "Latest transactions",
+    "ex_block": "Block",
+
+    // transaction
+    "tx_title": "Transaction Details",
+    "tx_block_hash": "Block Hash",
+    "tx_recipients": "Recipients",
+    "tx_contributors": "Input Addresses",
+    "tx_hash": "Tx Hash",
+    "tx_address": "Address",
+    "tx_nonstandard": "NON STANDARD TX",
+    "tx_type": "Tx Type",
+    "tx_type_self": "To self",
+    "tx_type_sent": "Sent",
+    "tx_type_received": "Received",
+    "tx_type_signal_club_start": "Starting Club",
+    "tx_type_signal_club_member": "New club member",
+    "tx_type_signal_club_joining": "Joining Club",
+    "tx_type_mined": "Mining reward",
+    "tx_type_mined_orphan": "Orphan",
+
+    // movement
+    "mv_latest_movements": "Latest movements greater than",
+
+    // address
+    "club_infos": "Club infos",
+    "club_miner": "Club address: ",
+    "club_leader": "This address is it's own Club Leader",
+    "club_clubpower": "Club power: ",
+    "club_selfpower": "Self power: ",
+    "club_rewards": "Mining rewards earned: ",
+
+    // block
+    "block_title": "Block Details",
+    "block_previous": "Previous",
+    "block_next": "Next",
+    "block_genesis": "GENESIS",
 
     // richlist
     "rl_received_coins": "Top 100 - Received Coins",
@@ -74,7 +84,7 @@
     "rl_top100": "Top 76-100",
     "rl_hundredplus": "101+",
 
-    // movements
+    // network
     "net_connections": "Connections",
     "net_address": "Address",
     "net_protocol": "Protocol",
@@ -82,13 +92,33 @@
     "net_country": "Country",
     "net_warning": "This is sub sample of the network based on wallets that have connected to this node in the last 24hours.",
 
-    // api view
+    // api
     "api_title": "API Documentation",
     "api_message": "The block explorer provides an API allowing users and/or applications to retrieve information from the network without the need for a local wallet.",
     "api_calls": "API Calls",
+    "api_calls_message": "Return data from taucoind",
+    "api_getinfo": "Returns a json object containing various state info.",
+    "api_getmininginfo": "Returns a json object containing mining-related information.",
     "api_getconnectioncount": "Returns the number of connections the block explorer has to other nodes.",
     "api_getblockcount": "Returns the current block index.",
-    "api_getblockhash": "Returns the hash of the block at ; index 0 is the genesis block.",
-    "api_getblock": "Returns information about the block with the given hash.",
-    "api_getrawtransaction": "Returns raw transaction representation for given transaction id. decrypt can be set to 0(false) or 1(true).",
+    "api_getblockhash": "Returns the hash of the given block [index]. Index 0 being the genesis block.",
+    "api_getblock": "Returns a json object containing informations about the given block [hash].",
+    "api_getrawtransaction": "Returns raw transaction representation for given transaction [txid]. [decrypt] can be set to 0 or 1 (default).",
+    "api_getpeerinfo": "Returns a json array of objects containing data about each connected network node.",
+    "api_gettxoutsetinfo": "Returns a json object containing statistics about the unspent transaction output set.",
+    "api_getmemberinfo": "Returns a json object containing member information by [address].",
+
+    "api_ext": "Extended API",
+    "api_ext_message": "Return data from explorer database",
+    "api_ext_getmoneysupply": "Returns money supply",
+    "api_ext_getdistribution": "Returns a json object containing wealth distribution stats",
+    "api_ext_getaddress": "Returns a json object containing informations for given [address]",
+    "api_ext_getbalance": "Returns current balance of given [address]",
+    "api_ext_getlasttxs": "Returns last [count] transactions with amount greater than [min].",
+    "api_ext_getlasttxs_max": "optional, default and max =",
+    "api_ext_gettxcount": "Returns current transactions count",
+
+    "api_link": "Linking (GET)",
+    "api_link_message": "Linking to the block explorer",
+    "api_link_address": "optional, default and max =",
 }

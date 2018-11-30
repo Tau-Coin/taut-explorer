@@ -23,8 +23,7 @@ Create databse:
 
 Create user with read/write access:
 
-    > db.createUser( { user: "tauexplorer", pwd: "potisgood", roles: [ "readWrite" ] } )
-
+    > {db.createUser( { user: "user", pwd: "pwd", roles: [ "readWrite" ] } )}
 
 ### Get the source
 
@@ -126,7 +125,7 @@ Where [SIZE] is an integer higher than the default.
 *note: SIZE will depend on which blockchain you are using, you may need to play around a bit to find an optimal setting*
 
 ### License
-
+  
 Copyright (c) 2015, Iquidus Technology  
 Copyright (c) 2015, Luke Williams  
 All rights reserved.

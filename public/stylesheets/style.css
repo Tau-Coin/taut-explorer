@@ -133,6 +133,7 @@ td.text-nowrap{
 	display: inline-block;
 }
 #lblBlockcount {
+	margin-left: 10px;
 	margin-right: 10px;
 }
 
@@ -175,9 +176,7 @@ td.text-nowrap{
     }
 }
 .qrcode {
-	position: absolute;
-	top: 65px;
-	right: 15px;
+	margin-bottom: 15px;
 }
 
 .footer-logo {

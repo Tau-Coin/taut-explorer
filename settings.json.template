@@ -8,7 +8,8 @@
   "title": "TAU Explorer",
 
   // The url it will be accessed from
-  "address": "127.0.0.1:3001",
+  //"address": "http://block.taucoin.io",
+  "address": "127.0.0.1:3000",
 
   // Logo
   "logo": "/images/logo-tau.png",
@@ -117,6 +118,7 @@
   "discord": "ydhx3um", // https://discord.gg/XXXX
   "facebook": "taublockchain", // https://www.facebook.com/XXXX
   "github": "Tau-Coin", // https://github.com/XXXX
+  "github_explorer": "Tau-Coin/tau-explorer", // https://github.com/XXXX
   "medium": "@taucoin", // https://medium.com/XXXX
   "reddit": "Tau_coin", // https://www.reddit.com/r/XXXX
   "telegram": "taucoin", // https://t.me/XXXX

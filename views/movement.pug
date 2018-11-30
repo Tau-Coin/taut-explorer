@@ -31,10 +31,11 @@ block content
       var rtable = $('#alerts-table').dataTable( {  
         autoWidth: true,      
         searching: false,
-        ordering: false,
+        ordering: true,
         responsive: true,
         lengthChange: true,
         processing: true,
+        order: [[ 0, "desc" ]],
         ajax: {
           url: '/ext/getlasttxs/#{min_amount}',
           dataSrc: function ( json ) {
@@ -69,11 +70,11 @@ block content
   .col-xs-12.col-md-10.col-md-offset-1
      .panel.panel-default
       .panel-heading
-        strong #{settings.locale.mv_latest_movements}
+        strong #{settings.locale.mv_latest_movements} #{min_amount}&nbsp;#{settings.symbol}
       table#alerts-table.table.table-bordered.table-striped
         thead
           tr
             th #{settings.locale.timestamp}
-            th.hidden-xs #{settings.locale.tx_hash}
+            th.hidden-xs.hidden-sm #{settings.locale.tx_hash}
             th.text-right.text-nowrap #{settings.locale.amount} (#{settings.symbol})
         tbody

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
 var PeersSchema = new Schema({
   createdAt: { type: Date, expires: 86400, default: Date.now()},

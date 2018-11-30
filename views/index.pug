@@ -4,12 +4,13 @@ block content
   script.
     $(document).ready(function(){
       var rtable = $('#recent-table').dataTable( {  
-        autoWidth: true,      
+        autoWidth: true,
         searching: false,
-        ordering: false,
+        ordering: true,
         responsive: true,
         lengthChange: true,
         processing: true,
+        order: [[ 0, "desc" ]],
         ajax: {
           url: '/ext/getlasttxs/0.00000001',
           dataSrc: function ( json ) {
@@ -51,6 +52,7 @@ block content
     .panel.panel-default
       .panel-heading
         strong #{settings.locale.ex_latest_transactions}
+        span#Txcount.pull-right -
       table#recent-table.table.table-bordered.table-striped
         thead
           tr

@@ -121,8 +121,8 @@ is_locked(function (exists) {
     process.exit(0);
   } else {
     create_lock(function (){
-      console.log("script launched with pid: " + process.pid);
-      mongoose.connect(dbString, function(err) {
+      console.log("Script launched with pid: " + process.pid);
+      mongoose.connect(dbString, { useNewUrlParser: true }, function(err) {
         if (err) {
           console.log('Unable to connect to database: %s', dbString);
           console.log('Aborting');
@@ -138,20 +138,20 @@ is_locked(function (exists) {
                   if (mode == 'reindex') {
                     Tx.remove({}, function(err) { 
                       Address.remove({}, function(err2) { 
-                        Richlist.update({coin: settings.coin}, {
+                        Richlist.updateOne({coin: settings.coin}, {
                           received: [],
                           balance: [],
                         }, function(err3) { 
-                          Stats.update({coin: settings.coin}, { 
-                            last: 0,
+                          Stats.updateOne({coin: settings.coin}, { 
+                            lastblock: 0,
                           }, function() {
-                            console.log('index cleared (reindex)');
+                            console.log('Index cleared (reindex)');
                           }); 
-                          db.update_tx_db(settings.coin, 1, stats.count, settings.update_timeout, function(){
+                          db.update_tx_db(settings.coin, 1, stats.blockcount, settings.update_timeout, function(){
                             db.update_richlist('received', function(){
                               db.update_richlist('balance', function(){
                                 db.get_stats(settings.coin, function(nstats){
-                                  console.log('reindex complete (block: %s)', nstats.last);
+                                  console.log('Reindex complete (block: %s)', nstats.lastblock);
                                   exit();
                                 });
                               });
@@ -161,18 +161,18 @@ is_locked(function (exists) {
                       });
                     });              
                   } else if (mode == 'check') {
-                    db.update_tx_db(settings.coin, 1, stats.count, settings.check_timeout, function(){
+                    db.update_tx_db(settings.coin, 1, stats.blockcount, settings.check_timeout, function(){
                       db.get_stats(settings.coin, function(nstats){
-                        console.log('check complete (block: %s)', nstats.last);
+                        console.log('Check complete (block: %s)', nstats.lastblock);
                         exit();
                       });
                     });
                   } else if (mode == 'update') {
-                    db.update_tx_db(settings.coin, stats.last, stats.count, settings.update_timeout, function(){
+                    db.update_tx_db(settings.coin, stats.lastblock, stats.blockcount, settings.update_timeout, function(){
                       db.update_richlist('received', function(){
                         db.update_richlist('balance', function(){
                           db.get_stats(settings.coin, function(nstats){
-                            console.log('update complete (block: %s)', nstats.last);
+                            console.log('Update complete (block: %s)', nstats.lastblock);
                             exit();
                           });
                         });

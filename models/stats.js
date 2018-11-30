@@ -1,13 +1,13 @@
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
  
 var StatsSchema = new Schema({
   coin: { type: String },
-  count: { type: Number, default: 1 },
-  last: { type: Number, default: 1 },
+  blockcount: { type: Number, default: 1 },
+  lastblock: { type: Number, default: 1 },
   supply: { type: Number, default: 0 },
-  // last_txs: { type: Array, default: [] },
   connections: { type: Number, default: 0 },
+  txcount: { type: Number, default: 1 },
 });
 
-module.exports = mongoose.model('coinstats', StatsSchema);
+module.exports = mongoose.model('CoinStats', StatsSchema);

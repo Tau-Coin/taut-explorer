@@ -6,10 +6,11 @@ block content
       var ctable = $('#connections-table').dataTable( {  
         autoWidth: true,      
         searching: false,
-        ordering: false,
+        ordering: true,
         responsive: true,
         lengthChange: true,
         processing: true,
+        order: [[ 3, "asc" ]],
         ajax: {
           url: '/ext/connections',
           dataSrc: function ( json ) {
@@ -27,6 +28,7 @@ block content
   .col-md-12(style="margin-bottom: 4%")
     .row.text-center(style='margin-bottom:15px;')
       i #{settings.locale.net_warning}
+
     .panel.panel-default
       .panel-heading
         strong #{settings.locale.net_connections}

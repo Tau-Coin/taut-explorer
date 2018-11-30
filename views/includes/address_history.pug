@@ -1,0 +1,97 @@
+thead
+  tr.text-center
+    th.text-center #{settings.locale.timestamp}
+    th.text-center #{settings.locale.tx_hash}
+    th.text-center.hidden-xs.hidden-sm #{settings.locale.tx_type}
+    th.text-center
+      div #{settings.locale.amount}&nbsp;(#{settings.symbol})
+      //- table.table.table-bordered(style="margin: 0 auto; max-width: 180px;")
+      //-   tbody
+      //-     tr(style="font-size: 10px; font-weight: normal;")
+      //-       td.info To Self
+      //-       td.success  Received
+      //-       td.danger Sent
+tbody
+  each tx in txs
+    - var time = format_unixtime(tx.timestamp)
+    tr
+      td.text-nowrap #{time} 
+      td.text-mono
+        a(href="/tx/"+tx.txid) 
+          span.hidden-xs.hidden-sm #{tx.txid}
+          span.hidden-md.hidden-lg.fa.fa-eye.iquidus
+        //- br
+        //- #{tx}
+      
+      - var vout = 0
+      - var vin = 0
+      - var is_receiver = false
+      - var is_sender = false
+      - var is_from_coinbase = false
+      - var tx_class = ""
+      - var tx_type = ""
+      - var sign = ""
+      - var amount = 0
+      
+      each receiver in tx.vout
+        if receiver.addresses == address.a_id
+          - is_receiver = true
+          - vout = receiver.amount
+      each sender in tx.vin
+        if sender.addresses == address.a_id
+          - is_sender = true
+          - vin = sender.amount
+        else if sender.addresses == "coinbase"
+          - is_from_coinbase = true
+
+      if is_receiver && is_sender
+        - amount = (vout - vin) / 100000000
+        - sign = "-"
+        if amount < 0
+          - amount = amount * -1
+          if tx.vout.length > 1
+            - tx_class = "danger"
+            - tx_type = settings.locale.tx_type_sent
+          else
+            - tx_class = "info"
+            - tx_type = settings.locale.tx_type_self
+        else if amount > 0
+          - tx_class = "info"
+          - tx_type = "???"
+          - sign = "+"
+        else if amount == 0
+          - tx_class = "warning text-info"
+          - tx_type = settings.locale.tx_type_signal_club_start
+          - sign = ""
+
+      else if is_receiver
+        - tx_class = "success"
+        - tx_type = settings.locale.tx_type_received
+        - sign = "+"
+        - amount = vout / 100000000
+        if is_from_coinbase
+          if amount == 0
+            - tx_class = "text-muted"
+            - tx_type = settings.locale.tx_type_mined_orphan
+            - sign = ""
+          else
+            - tx_class = "text-success"
+            - tx_type = settings.locale.tx_type_mined
+        else if amount == 0
+          - tx_class = "warning text-success"
+          - tx_type = settings.locale.tx_type_signal_club_member
+          - sign = ""
+
+      else
+        - tx_class = "danger"
+        - tx_type = settings.locale.tx_sent
+        - sign = "-"
+        - var amount = vin / 100000000
+        if amount == 0
+          - tx_class = "warning text-danger"
+          - tx_type = settings.locale.tx_type_signal_club_joining
+          - sign = ""
+
+      td(class="hidden-xs hidden-sm " + tx_class) #{tx_type}
+      td(class="text-numeric " + tx_class) #{sign}&nbsp;#{amount.toFixed(8)}
+      

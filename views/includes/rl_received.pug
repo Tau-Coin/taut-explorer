@@ -7,7 +7,7 @@
         th(style='text-align:center;') 
           span.fa.fa-flag-checkered
         th #{settings.locale.tx_address} 
-        th.hidden-xs #{settings.locale.rl_received} (#{settings.symbol})
+        th.hidden-xs.hidden-sm #{settings.locale.rl_received} (#{settings.symbol})
     tbody
       - var count = 0
       each item in received
@@ -17,7 +17,7 @@
           td
             =count
           td.text-mono
-            a(href='/address/#{item.a_id}') #{item.a_id}
-            include ./rl_labels.jade
+            a(href="/address/" + item.a_id) #{item.a_id}
+            include rl_labels
           td.text-numeric.hidden-xs
             =itemFixed.toFixed(8)

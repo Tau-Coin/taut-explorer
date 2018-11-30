@@ -27,7 +27,7 @@ function trim(s, mask) {
     return s;
 }
 
-mongoose.connect(dbString, function(err) {
+mongoose.connect(dbString, { useNewUrlParser: true },  function(err) {
   if (err) {
     console.log('Unable to connect to database: %s', dbString);
     console.log('Aborting');

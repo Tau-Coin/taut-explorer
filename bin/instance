@@ -2,7 +2,7 @@
 var debug = require('debug')('explorer');
 var settings = require('../lib/settings');
 var db = require('../lib/database');
-var app = require('../app');
+var app = require('../app'); 
 
 app.set('port', process.env.PORT || settings.port);
 
@@ -15,7 +15,7 @@ dbString = dbString + '/' + settings.dbsettings.database;
 db.connect(dbString, function() {
   db.check_stats(settings.coin, function(exists) {
     if (exists == false) {
-      console.log('no stats entry found, creating now..');
+      console.log('No stats entry found, creating now..');
       db.create_stats(settings.coin, function(){
         //console.log('stats entry created successfully.');
       });

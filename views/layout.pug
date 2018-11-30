@@ -2,33 +2,31 @@ doctype html
 html
   head
     title= settings.title
-    link(rel='stylesheet', href='/themes/#{settings.theme}/bootstrap.min.css')
-    link(rel='stylesheet', href='/vendor/jqplot/jquery.jqplot.css')
+    link(rel='stylesheet', href='/themes/' + settings.theme + '/bootstrap.min.css')
+    block css_header
     link(rel='stylesheet', href='//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.css')
     link(rel='stylesheet', href='//use.fontawesome.com/releases/v5.4.1/css/all.css', integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
-    script(src='/vendor/jqplot/jquery.jqplot.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.ohlcRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.highlighter.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.pieRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.barRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.categoryAxisRenderer.min.js')
+    block js_header
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js')
     script(src='//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js')  
     script(src='//cdn.datatables.net/responsive/1.0.1/js/dataTables.responsive.js')
     script(src='//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.js')
-    script(src='/javascripts/chart.js')
+    // script(src='/javascripts/chart.js')
     script.
       $(document).ready(function(){
         $('##{active}').addClass('active');
+        var tx_count=0;
         function update_stats(){   
           $.ajax({url: '/ext/summary', success: function(json){
             $("#supply").text(json.data[0].supply);
-            $("#lblConnections").text(json.data[0].connections + ' connections');
+            tx_count=json.data[0].txcount;
+            $("#lblTxcount").text(json.data[0].txcount + ' transactions');
+            $("#Txcount").text(json.data[0].txcount + ' transactions');
             $("#lblBlockcount").text(json.data[0].blockcount + ' blocks');
+            $("#lblConnections").text(json.data[0].connections + ' connections');
           }});
         }
         $('.block-last-next').tooltip({
@@ -37,8 +35,9 @@ html
         });
         $('.history-table').dataTable( {        
           searching: false,
-          ordering: false,
-          responsive: true
+          ordering: true,
+          responsive: true,
+          order: [[ 0, "desc" ]],
         });
         $('.iquidus').css('color',$('.table').css('color'));
         $(window).resize(function () { 
@@ -112,65 +111,66 @@ html
                   span.menu-text #{settings.locale.menu_api}
     .row.text-center
       .col-md-12
-        img(src='#{settings.logo}', style='margin-top:-15px;height:128px;')
+        img(src=settings.logo, style='margin-top:-15px;height:128px;')
       .col-md-12(style='margin-top:10px;margin-bottom:20px;')
         form.form-inline(method='post', action='/search')      
           #index-search.form-group
-            input.form-control(type='text', name='search', placeholder='#{settings.locale.ex_search_message}', style='min-width:80%;margin-right:5px;')
-            button.btn.btn-success(type='submit') #{settings.locale.ex_search_button}
+            input.form-control(type='text', name='search', placeholder=settings.locale.ex_search_message, style='min-width:80%;margin-right:5px;')
+            button.btn.btn-success(type='submit')=settings.locale.ex_search_button
 
     .row
       block content
 
-    .navbar.navbar-inverse.navbar-fixed-bottom.hidden-xs
-      .col-sm-4
+    .navbar.navbar-inverse.navbar-fixed-bottom
+      .hidden-xs.col-sm-6.col-md-5
         ul.nav.navbar-nav.snlinks
           if settings.snlinks.twitter
             li
-              a#twitter-icon.snlink(href="https://twitter.com/#{settings.twitter}", title='Twitter', target='_blank')
+              a#twitter-icon.snlink(href="https://twitter.com/" + settings.twitter, title='Twitter', target='_blank')
                 span.fab.fa-twitter
           if settings.snlinks.facebook
             li
-              a#facebook-icon.snlink(href="https://www.facebook.com/#{settings.facebook}", title='Facebook', target='_blank')
+              a#facebook-icon.snlink(href="https://www.facebook.com/" + settings.facebook, title='Facebook', target='_blank')
                 span.fab.fa-facebook-f
           if settings.snlinks.reddit
             li
-              a#reddit-icon.snlink(href="https://reddit.com/r/#{settings.reddit}", title='Reddit', target='_blank')
+              a#reddit-icon.snlink(href="https://reddit.com/r/" + settings.reddit, title='Reddit', target='_blank')
                 span.fab.fa-reddit
           if settings.snlinks.discord
             li
-              a#discord-icon.snlink(href="https://discord.gg/#{settings.discord}", title='Discord', target='_blank')
+              a#discord-icon.snlink(href="https://discord.gg/" + settings.discord, title='Discord', target='_blank')
                 span.fab.fa-discord
           if settings.snlinks.telegram
             li
-              a#telegram-icon.snlink(href="https://t.me/#{settings.telegram}", title='Telegram', target='_blank')
+              a#telegram-icon.snlink(href="https://t.me/" + settings.telegram, title='Telegram', target='_blank')
                 span.fab.fa-telegram-plane
           if settings.snlinks.medium
             li
-              a#medium-icon.snlink(href="https://medium.com/#{settings.medium}", title='Medium', target='_blank')
+              a#medium-icon.snlink(href="https://medium.com/" + settings.medium, title='Medium', target='_blank')
                 span.fab.fa-medium-m
           if settings.snlinks.github
             li
-              a#github-icon.snlink(href="https://github.com/#{settings.github}", title='Github', target='_blank')
+              a#github-icon.snlink(href="https://github.com/" + settings.github, title='Github', target='_blank')
                 span.fab.fa-github
           if settings.snlinks.youtube
             li
-              a#youtube-icon.snlink(href="https://www.youtube.com/channel/#{settings.youtube}", title='Youtube', target='_blank')
+              a#youtube-icon.snlink(href="https://www.youtube.com/channel/" + settings.youtube, title='Youtube', target='_blank')
                 span.fab.fa-youtube
           if settings.snlinks.bitcointalk
             li
-              a#bitcointalk-icon.snlink(href="https://bitcointalk.org/index.php?topic=#{settings.bitcointalk}", title='BitcoinTalk ANN', target='_blank')
+              a#bitcointalk-icon.snlink(href="https://bitcointalk.org/index.php?topic=" + settings.bitcointalk, title='BitcoinTalk ANN', target='_blank')
                 span.fab.fa-btc
           if settings.snlinks.website
             li
-              a#website-icon.snlink(href="#{settings.website}", target='_blank')
+              a#website-icon.snlink(href="" + settings.website, target='_blank')
                 span.fas.fa-globe
-      .col-sm-4
+      .hidden-xs.hidden-sm.col-md-2
         div.text-center(style='margin-top: 5px;')
-          a.navbar-link(style='font-size: 120%;', href='https://github.com/#{settings.github}', target='_blank') Tau explorer
+          a.navbar-link(style='font-size: 120%;', href="https://github.com/" + settings.github_explorer, target='_blank') Tau explorer
           br
           a.navbar-link(style='font-size: 80%;', href='https://github.com/iquidus/explorer', target='_blank') Based on Iquidus Explorer 
-      .col-sm-4
+      .col-xs-12.col-sm-6.col-md-5
         div.connections.text-right
+          span#lblTxcount.label.label-default -
           span#lblBlockcount.label.label-default -
-          spanl#lblConnections.label.label-default -
+          span#lblConnections.label.label-default -

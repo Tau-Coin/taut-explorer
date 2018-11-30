@@ -1,0 +1,171 @@
+extends layout
+
+block content
+  .col-md-12.col-xs-12
+    .panel.panel-default
+      .panel-heading
+        strong= settings.locale.api_title
+      .panel-body
+        em= settings.locale.api_message
+        hr
+
+        h3= settings.locale.api_calls
+        em= settings.locale.api_calls_message
+
+        ul
+          li
+            p
+              strong getinfo
+              br
+              em= settings.locale.api_getinfo
+              br
+              a(href='/api/getinfo') #{address}/api/getinfo
+          li
+            p
+              strong getmininginfo 
+              br
+              em= settings.locale.api_getmininginfo
+              br
+              a(href="/api/getmininginfo") #{address}/api/getmininginfo
+          li
+            p
+              strong getconnectioncount 
+              br
+              em= settings.locale.api_getconnectioncount
+              br
+              a(href="/api/getconnectioncount") #{address}/api/getconnectioncount
+          li
+            p
+              strong getblockcount 
+              br
+              em= settings.locale.api_getblockcount
+              br
+              a(href="/api/getblockcount") #{address}/api/getblockcount
+          li
+            p
+              strong getblockhash [index] 
+              br
+              em= settings.locale.api_getblockhash
+              br
+              a(href="/api/getblockhash?index="+hashes.blockindex) #{address}/api/getblockhash?index=#{hashes.blockindex}
+          li
+            p
+              strong getblock [hash] 
+              br
+              em= settings.locale.api_getblock
+              br
+              a(href="/api/getblock?hash="+hashes.blockhash) #{address}/api/getblock?hash=#{hashes.blockhash}
+          li
+            p
+              strong getrawtransaction [txid] [decrypt] 
+              br
+              em= settings.locale.api_getrawtransaction
+              br
+              a(href="/api/getrawtransaction?txid="+hashes.txhash+"&decrypt=0") #{address}/api/getrawtransacton?txid=#{hashes.txhash}&decrypt=0
+              br
+              a(href="/api/getrawtransaction?txid="+hashes.txhash+"&decrypt=1") #{address}/apigetrawtransaction?txid=#{hashes.txhash}&decrypt=1
+          li
+            p
+              strong getpeerinfo 
+              br
+              em= settings.locale.api_getpeerinfo
+              br
+              a(href="/api/getpeerinfo") #{address}/api/getpeerinfo
+          li
+            p
+              strong gettxoutsetinfo 
+              br
+              em= settings.locale.api_gettxoutsetinfo
+              br
+              a(href="/api/gettxoutsetinfo") #{address}/api/gettxoutsetinfo
+          li
+            p
+              strong getmemberinfo [address] 
+              br
+              em= settings.locale.api_getmemberinfo
+              br
+              a(href="/api/getmemberinfo?address="+hashes.address) #{address}/api/getmemberinfo?address=#{hashes.address}
+
+        hr
+
+        h3= settings.locale.api_ext
+        em= settings.locale.api_ext_message
+
+        ul
+          li
+            p
+              strong getmoneysupply 
+              br
+              em= settings.locale.api_ext_getmoneysupply
+              br
+              a(href="/ext/getmoneysupply") #{address}/ext/getmoneysupply
+          li
+            p
+              strong getdistribution 
+              br
+              em= settings.locale.api_ext_getdistribution
+              br
+              a(href="/ext/getdistribution") #{address}/ext/getdistribution
+          li
+            p
+              strong getaddress [address]
+              br
+              em= settings.locale.api_ext_getaddress
+              br
+              a(href="/ext/getaddress/"+hashes.address) #{address}/ext/getaddress/#{hashes.address}
+          li
+            p
+              strong getbalance [address]
+              br
+              em= settings.locale.api_ext_getbalance
+              br
+              a(href="/ext/getbalance/"+hashes.address) #{address}/ext/getbalance/#{hashes.address}
+          li
+            p
+              strong getlasttxs [min] [count](#{settings.locale.api_ext_getlasttxs_max}&nbsp;#{settings.index.last_txs})
+              br
+              em= settings.locale.api_ext_getlasttxs
+              br
+              a(href="/ext/getlasttxs/1234") #{address}/ext/getlasttxs/1234
+              br
+              a(href="/ext/getlasttxs/1234/20") #{address}/ext/getlasttxs/1234/20
+
+          li
+            p
+              strong gettxcount 
+              br
+              em= settings.locale.api_ext_gettxcount
+              br
+              a(href="/ext/gettxcount") #{address}/ext/gettxcount
+
+        hr
+
+        h3= settings.locale.api_link
+        em= settings.locale.api_link_message
+
+        ul
+          li
+            p
+              strong transaction [txid]
+              br
+              a(href="/tx/"+hashes.txhash) #{address}/tx/#{hashes.txhash}
+          li
+            p
+              strong block [hash]
+              br
+              a(href="/block/"+hashes.blockhash) #{address}/block/#{hashes.blockhash}
+          li
+            p
+              strong address [address] [tx_count](#{settings.locale.api_link_address}&nbsp;#{settings.txcount})
+              br
+              a(href="/address/"+hashes.address) #{address}/address/#{hashes.address}
+              br
+              a(href="/address/"+hashes.address+"/20") #{address}/address/#{hashes.address}/20
+          li
+            p
+              strong qrcode [address] 
+              br
+              a(href="/qr/"+hashes.address) #{address}/qr/#{hashes.address}
+
+    .footer-padding
+
